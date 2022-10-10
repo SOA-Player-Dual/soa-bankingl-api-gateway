@@ -1,0 +1,334 @@
+_id: spc_8bb00adafba14205a6cdbd92e3d41d17
+type: ApiSpec
+parentId: wrk_75a9cc140e504c289fea7fb53440c7c3
+modified: 1664383511304
+created: 1664382971544
+fileName: SOA-Nodejs.yaml
+contents: >-
+  openapi: 3.0.0
+
+  info:
+    description: "This is the Swagger page for Player Dual website. You can use the api key `special-key` to test the authorization filters."
+    version: 1.0.2
+    title: Swagger Player Dual
+    termsOfService: http://swagger.io/terms/
+    contact:
+      email: thanhhuyn.0@gmail.com
+    license:
+      name: Apache 2.0
+      url: http://www.apache.org/licenses/LICENSE-2.0.html
+  tags:
+    - name: user
+      description: Operations about user
+  paths:
+    /user:
+      post:
+        tags:
+          - user
+        summary: Create user
+        description: This can only be done by the logged in user.
+        operationId: createUser
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Created user object
+          required: true
+        responses:
+          default:
+            description: successful operation
+    /user/createWithArray:
+      post:
+        tags:
+          - user
+        summary: Creates list of users with given input array
+        description: ""
+        operationId: createUsersWithArrayInput
+        requestBody:
+          $ref: "#/components/requestBodies/UserArray"
+        responses:
+          default:
+            description: successful operation
+    /user/createWithList:
+      post:
+        tags:
+          - user
+        summary: Creates list of users with given input array
+        description: ""
+        operationId: createUsersWithListInput
+        requestBody:
+          $ref: "#/components/requestBodies/UserArray"
+        responses:
+          default:
+            description: successful operation
+    /user/login:
+      get:
+        tags:
+          - user
+        summary: Logs user into the system
+        description: ""
+        operationId: loginUser
+        parameters:
+          - name: username
+            in: query
+            description: The user name for login
+            required: true
+            schema:
+              type: string
+          - name: password
+            in: query
+            description: The password for login in clear text
+            required: true
+            schema:
+              type: string
+        responses:
+          "200":
+            description: successful operation
+            headers:
+              X-Rate-Limit:
+                description: calls per hour allowed by the user
+                schema:
+                  type: integer
+                  format: int32
+              X-Expires-After:
+                description: date in UTC when token expires
+                schema:
+                  type: string
+                  format: date-time
+            content:
+              application/xml:
+                schema:
+                  type: string
+              application/json:
+                schema:
+                  type: string
+          "400":
+            description: Invalid username/password supplied
+    /user/logout:
+      get:
+        tags:
+          - user
+        summary: Logs out current logged in user session
+        description: ""
+        operationId: logoutUser
+        responses:
+          default:
+            description: successful operation
+    "/user/{username}":
+      get:
+        tags:
+          - user
+        summary: Get user by user name
+        description: ""
+        operationId: getUserByName
+        parameters:
+          - name: username
+            in: path
+            description: "The name that needs to be fetched. Use user1 for testing. "
+            required: true
+            schema:
+              type: string
+        responses:
+          "200":
+            description: successful operation
+            content:
+              application/xml:
+                schema:
+                  $ref: "#/components/schemas/User"
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/User"
+          "400":
+            description: Invalid username supplied
+          "404":
+            description: User not found
+      put:
+        tags:
+          - user
+        summary: Updated user
+        description: This can only be done by the logged in user.
+        operationId: updateUser
+        parameters:
+          - name: username
+            in: path
+            description: name that need to be updated
+            required: true
+            schema:
+              type: string
+        requestBody:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: Updated user object
+          required: true
+        responses:
+          "400":
+            description: Invalid user supplied
+          "404":
+            description: User not found
+      delete:
+        tags:
+          - user
+        summary: Delete user
+        description: This can only be done by the logged in user.
+        operationId: deleteUser
+        parameters:
+          - name: username
+            in: path
+            description: The name that needs to be deleted
+            required: true
+            schema:
+              type: string
+        responses:
+          "400":
+            description: Invalid username supplied
+          "404":
+            description: User not found
+  externalDocs:
+    description: Find out more about Swagger
+    url: http://swagger.io
+  servers:
+    - url: http://127.0.0.1:3000/v1
+  components:
+    requestBodies:
+      UserArray:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/User"
+        description: List of user object
+        required: true
+      Pet:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pet"
+          application/xml:
+            schema:
+              $ref: "#/components/schemas/Pet"
+        description: Pet object that needs to be added to the store
+        required: true
+    schemas:
+      Order:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          petId:
+            type: integer
+            format: int64
+          quantity:
+            type: integer
+            format: int32
+          shipDate:
+            type: string
+            format: date-time
+          status:
+            type: string
+            description: Order Status
+            enum:
+              - placed
+              - approved
+              - delivered
+          complete:
+            type: boolean
+            default: false
+        xml:
+          name: Order
+      User:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          username:
+            type: string
+          firstName:
+            type: string
+          lastName:
+            type: string
+          email:
+            type: string
+          password:
+            type: string
+          phone:
+            type: string
+          userStatus:
+            type: integer
+            format: int32
+            description: User Status
+        xml:
+          name: User
+      Category:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          name:
+            type: string
+        xml:
+          name: Category
+      Tag:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          name:
+            type: string
+        xml:
+          name: Tag
+      Pet:
+        type: object
+        required:
+          - name
+          - photoUrls
+        properties:
+          id:
+            type: integer
+            format: int64
+          category:
+            $ref: "#/components/schemas/Category"
+          name:
+            type: string
+            example: doggie
+          photoUrls:
+            type: array
+            xml:
+              name: photoUrl
+              wrapped: true
+            items:
+              type: string
+          tags:
+            type: array
+            xml:
+              name: tag
+              wrapped: true
+            items:
+              $ref: "#/components/schemas/Tag"
+          status:
+            type: string
+            description: pet status in the store
+            enum:
+              - available
+              - pending
+              - sold
+        xml:
+          name: Pet
+      ApiResponse:
+        type: object
+        properties:
+          code:
+            type: integer
+            format: int32
+          type:
+            type: string
+          message:
+            type: string
+contentType: yaml
