@@ -8,9 +8,9 @@ const errorHandler = (
   _next: NextFunction,
 ) => {
   try {
-    return res.status(error.statusCode).json({ msg: error.message });
+    return res.status(error.statusCode).json({ error: error.message });
   } catch (_err) {
-    return res.status(500).json({ msg: 'Unexpected error from server' });
+    return res.status(500).json({ error: 'Unexpected error from server' });
   }
 };
 

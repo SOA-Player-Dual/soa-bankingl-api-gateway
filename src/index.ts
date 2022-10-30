@@ -1,19 +1,22 @@
+import('module-alias/register')
 import * as moduleAlias from 'module-alias';
-import RedisClient from '@config/redis';
-import { createServer } from '@config/express';
-import { AddressInfo } from 'net';
-import mongoose from 'mongoose';
-import http from 'http';
-import 'dotenv/config';
-
-const sourcePath = 'src';
+const sourcePath = __dirname;
 moduleAlias.addAliases({
   '@server': sourcePath,
   '@config': `${sourcePath}/config`,
   '@domain': `${sourcePath}/domain`,
   '@controller': `${sourcePath}/controller`,
   '@middleware': `${sourcePath}/middleware`,
+  '@model': `${sourcePath}/model`,
+  '@helper': `${sourcePath}/helper`,
+  '@interface': `${sourcePath}/interface`,
 });
+import RedisClient from '@config/redis';
+import { createServer } from '@config/express';
+import { AddressInfo } from 'net';
+import http from 'http';
+import 'dotenv/config';
+
 
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || '3000';
@@ -29,7 +32,6 @@ const startServer = async () => {
 
   Promise.all([
     RedisClient.connect().then(() => 'Redis'),
-    mongoose.connect(process.env.MONGO_URI).then(() => 'Mongodb'),
   ]).then((_: string[]) => {
     console.log(`Connected to ${_}`);
   });

@@ -28,7 +28,8 @@
       "@controller/*": ["src/controller/*"],
       "@middleware/*": ["src/middleware/*"],
       "@model/*": ["src/model/*"],
-      "@helper/*": ["src/helper/*"]
+      "@helper/*": ["src/helper/*"],
+      "@interface/*": ["src/interface/*"]
     }
   },
   "include": ["src/**/*", "__tests__/**/*"],
