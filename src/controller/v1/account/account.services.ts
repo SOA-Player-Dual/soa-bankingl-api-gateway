@@ -28,11 +28,11 @@ export const getOTP = async (
   next: NextFunction,
 ) => {
   try {
-    const { data } = await axios.post(
+    await axios.post(
       `${process.env.LARAVEL_TUITION_API}/otp/send`,
-      { mssv: _req.body.mssv },
+        { student_id: _req.body.mssv, user_id: _req.body.userID },
     );
-    return res.json({ msg: 'Get OTP', data: { otp: data.otp } });
+    return res.json({ msg: 'Check your email to get OTP' });
   } catch (e) {
     if (axios.isAxiosError(e)) {
       return next(createError(e.response.status));
@@ -47,6 +47,10 @@ export const verifyOTP = async (
   next: NextFunction,
 ) => {
   try {
+    await axios.post(
+        `${process.env.LARAVEL_TUITION_API}/otp/verify`,
+        { user_id: _req.body.userID, otp_code: _req.body.otp },
+    );
     return res.json({ msg: 'Verify OTP' });
   } catch (e) {
     if (axios.isAxiosError(e)) {
