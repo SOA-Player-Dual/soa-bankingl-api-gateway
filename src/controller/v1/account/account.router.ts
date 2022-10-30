@@ -10,6 +10,6 @@ const router = Router();
 router.route('/tuition/:studentID').get(getTuitionInfo);
 router.route('/otp')
     .post(getOTP)
-    .patch(verifyOTP);
+    .put(verifyOTP);
 
 export default router;
