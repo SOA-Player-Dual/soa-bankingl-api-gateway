@@ -12,10 +12,15 @@ const createServer = (): express.Application => {
   const app = express();
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
-  app.use(cors());
+  app.use(
+    cors({
+      credentials: true,
+      origin: ["https://localhost:3000", "http://localhost:3000"],
+    }),
+  );
   app.use(express.json());
   app.disable('x-powered-by');
-  if (!fs.existsSync('log')){
+  if (!fs.existsSync('log')) {
     fs.mkdirSync('log');
   }
   const accessLogStream = fs.createWriteStream(`log/server.log`, {
