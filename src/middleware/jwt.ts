@@ -5,7 +5,7 @@ import { verifyAccessToken } from '@helper/jwt';
 const API = '/api/v1';
 const exclusive = {
   GET: [],
-  POST: ['/auth/login', '/auth/register'],
+  POST: ['/auth/login', '/auth/register', '/auth/refresh'],
   PUT: [],
   DELETE: [],
 };
