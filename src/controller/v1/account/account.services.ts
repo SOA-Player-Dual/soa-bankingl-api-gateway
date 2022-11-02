@@ -77,3 +77,21 @@ export const verifyOTP = async (
     return next(e);
   }
 };
+
+export const getHistory = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.LARAVEL_LOGIN_API}/transaction-history?user_id=${res.locals?._id}`,
+    );
+    return res.json({ msg: 'Get history successfully', data });
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      return next(createError(e.response.status));
+    }
+    return next(e);
+  }
+};
