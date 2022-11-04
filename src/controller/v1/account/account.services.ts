@@ -34,7 +34,7 @@ export const getSurplusInfo = async (
     return res.json({ msg: 'ok', data });
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      return next(createError(e.response.status));
+      return next(createError(e.response.status, e.response.data.error));
     }
     return next(e);
   }
@@ -53,7 +53,7 @@ export const getOTP = async (
     return res.json({ msg: 'Check your email to get OTP' });
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      return next(createError(e.response.status));
+      return next(createError(e.response.status, e.response.data.error));
     }
     return next(e);
   }
@@ -72,7 +72,7 @@ export const verifyOTP = async (
     return res.json({ msg: 'Verify OTP' });
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      return next(createError(e.response.status));
+      return next(createError(e.response.status, e.response.data.error));
     }
     return next(e);
   }
@@ -90,7 +90,7 @@ export const getHistory = async (
     return res.json({ msg: 'Get history successfully', data });
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      return next(createError(e.response.status));
+      return next(createError(e.response.status, e.response.data.error));
     }
     return next(e);
   }
