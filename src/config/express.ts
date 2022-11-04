@@ -15,7 +15,7 @@ const createServer = (): express.Application => {
   app.use(
     cors({
       credentials: true,
-      origin: ["https://localhost:3000", "http://localhost:3000"],
+      origin: ["https://localhost:3000", "http://localhost:3000", "https://soa-banking-ui.vercel.app"],
     }),
   );
   app.use(express.json());
