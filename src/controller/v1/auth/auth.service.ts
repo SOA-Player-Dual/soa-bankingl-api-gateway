@@ -38,7 +38,7 @@ export const login = async (
     });
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      return next(createError(e.response.status, e.response.data.error));
+      return next(createError(e.response?.status || 401, e.response.data.error || 'Wrong username / password'));
     }
     return next(e);
   }
