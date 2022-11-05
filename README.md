@@ -55,7 +55,7 @@ To run tests, run the following command
 To run tests, run the following command
 
 ```bash
-  npm run test
+  npm run build
 ```
 
 
