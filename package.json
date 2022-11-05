@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register build/src/index",
+    "start": "node build/src/index",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
     "test": "jest",
     "prepare": "husky install",

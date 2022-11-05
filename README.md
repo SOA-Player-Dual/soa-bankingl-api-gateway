@@ -1,18 +1,7 @@
 
 # Player Dual API Gateway
 
-This is the API gateway for Player Dual project - the best gaming platformer to connect people together.
-
-
-## Features
-
-These are just placeholders, not the real features
-
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
-
+This is the API gateway for Tuition banking web application.
 
 ## Environment Variables
 
@@ -20,27 +9,23 @@ To run this project, you will need to add the following environment variables to
 
 ```
 NODE_ENV = development
-PORT = 3000
+PORT = 8000
 REDIS_URI = <Your redis uri>
-MONGO_URI = <Your mongodb uri>
 ACCESS_SECRET = <Your secret key>
 REFRESH_SECRET = <Your secret key>
-GOOGLE_CLIENT_ID = <Your google client id>
-GOOGLE_CLIENT_SECRET = <Your google client secret>
-GOOGLE_CALLBACK = <Your callback url>
 ```
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/SOA-Player-Dual/soa-playerdual-server
+  git clone https://github.com/SOA-Player-Dual/soa-bankingl-api-gateway
 ```
 
 Go to the project directory
 
 ```bash
-  cd soa-playerdual-server
+  cd soa-bankingl-api-gateway
 ```
 
 Install dependencies
@@ -57,6 +42,15 @@ Start the server
 
 
 ## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
+
+## Build product
 
 To run tests, run the following command
 
